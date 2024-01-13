@@ -1,4 +1,4 @@
-package com.brayandev.listtaskapp.ui.theme
+package com.brayandev.listtaskapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
