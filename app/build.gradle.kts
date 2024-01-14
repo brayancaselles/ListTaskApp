@@ -1,7 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")
+    id("kotlin-kapt")
 }
 
 android {
@@ -84,8 +84,8 @@ dependencies {
 
     // Room
     implementation("androidx.room:room-runtime:2.6.0")
-    kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
+    kapt("androidx.room:room-compiler:2.6.0")
 
     // Arrow kotlin
     implementation("io.arrow-kt:arrow-core:1.1.5")

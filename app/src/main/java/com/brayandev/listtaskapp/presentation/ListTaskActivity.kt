@@ -12,18 +12,15 @@ import com.brayandev.listtaskapp.presentation.theme.ListTaskAppTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: TaskViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ListTaskAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    Task(viewModel = viewModel)
+                    Task()
                 }
             }
         }

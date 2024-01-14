@@ -25,6 +25,7 @@ import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.Store
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -34,6 +35,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -41,16 +43,32 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.brayandev.listtaskapp.domain.model.TaskModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Task(viewModel: TaskViewModel) {
+fun Task(viewModel: TaskViewModel = koinViewModel()) {
     val showDialog: Boolean by viewModel.showDialog.observeAsState(false)
+
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+
+    val uiState by produceState<UiState>(
+        initialValue = UiState.Loading,
+        key1 = lifecycle,
+        key2 = viewModel
+    ) {
+        lifecycle.repeatOnLifecycle(state = Lifecycle.State.STARTED) {
+            viewModel.uiState.collect { value = it }
+        }
+    }
 
     Column(modifier = Modifier.fillMaxWidth()) {
         Title("Lista de Tareas", Icons.Filled.List)
@@ -61,7 +79,7 @@ fun Task(viewModel: TaskViewModel) {
                 onStoreAdded = { viewModel.onTaskCreated(it) },
             )
             FabDialog(modifier = Modifier.align(Alignment.BottomEnd), viewModel)
-            // storeList((uiState as Success).list, storeViewModel, navController)
+            TaskList((uiState as UiState.Success).tasks, viewModel)
         }
     }
 }
@@ -186,7 +204,9 @@ fun ItemTask(task: TaskModel, taskViewModel: TaskViewModel) {
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth().height(40.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(40.dp),
         ) {
             Icon(
                 modifier = Modifier.padding(horizontal = 16.dp),
@@ -199,6 +219,10 @@ fun ItemTask(task: TaskModel, taskViewModel: TaskViewModel) {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.weight(1f),
                 color = Color.Black,
+            )
+            Checkbox(
+                checked = task.isSelected,
+                onCheckedChange = { taskViewModel.onCheckBoxSelected(task) },
             )
         }
     }
