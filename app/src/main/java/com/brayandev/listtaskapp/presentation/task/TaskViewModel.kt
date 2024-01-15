@@ -1,4 +1,4 @@
-package com.brayandev.listtaskapp.presentation
+package com.brayandev.listtaskapp.presentation.task
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,9 +9,9 @@ import com.brayandev.listtaskapp.domain.DeleteTaskUseCase
 import com.brayandev.listtaskapp.domain.GetAllTaskUseCase
 import com.brayandev.listtaskapp.domain.UpdateTaskUseCase
 import com.brayandev.listtaskapp.domain.model.TaskModel
-import com.brayandev.listtaskapp.presentation.UiState.Success
-import com.brayandev.listtaskapp.presentation.UiState.Error
-import com.brayandev.listtaskapp.presentation.UiState.Loading
+import com.brayandev.listtaskapp.presentation.task.UiState.Success
+import com.brayandev.listtaskapp.presentation.task.UiState.Error
+import com.brayandev.listtaskapp.presentation.task.UiState.Loading
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

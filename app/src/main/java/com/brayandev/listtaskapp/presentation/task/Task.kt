@@ -1,4 +1,4 @@
-package com.brayandev.listtaskapp.presentation
+package com.brayandev.listtaskapp.presentation.task
 
 import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
@@ -20,17 +20,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
-import androidx.compose.material.icons.rounded.LineStyle
-import androidx.compose.material.icons.rounded.Store
 import androidx.compose.material.icons.rounded.Task
 import androidx.compose.material.icons.rounded.TaskAlt
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
@@ -39,7 +35,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -53,7 +48,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -63,9 +57,9 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.brayandev.listtaskapp.domain.model.TaskModel
-import com.brayandev.listtaskapp.presentation.UiState.Error
-import com.brayandev.listtaskapp.presentation.UiState.Loading
-import com.brayandev.listtaskapp.presentation.UiState.Success
+import com.brayandev.listtaskapp.presentation.task.UiState.Error
+import com.brayandev.listtaskapp.presentation.task.UiState.Loading
+import com.brayandev.listtaskapp.presentation.task.UiState.Success
 
 @Composable
 fun Task(viewModel: TaskViewModel) {

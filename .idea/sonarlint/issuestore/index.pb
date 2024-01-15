@@ -107,3 +107,17 @@ l
 <app/src/main/java/com/brayandev/listtaskapp/di/RoomModule.kt,0\c\0c68897fd2f0f2e0aec4171c9122d2cbc796a58b
 w
 G.idea/sonarlint/issuestore/2/0/20241bbd214d8d38915261a3b084eec0ef87e23f,a\f\afd5874d8d63bffc83724c964d36c06c21951f8a
+x
+Happ/src/main/java/com/brayandev/listtaskapp/presentation/task/UiState.kt,3\d\3db4d5906647cf38a6a851c1acdc893528c3b8cc
+
+Qapp/src/main/java/com/brayandev/listtaskapp/presentation/task/ListTaskActivity.kt,a\d\ad5ae66a4599f1519f1434e6edfa3c04e2a7ef19
+~
+Napp/src/main/java/com/brayandev/listtaskapp/presentation/task/TaskViewModel.kt,b\a\ba1e72d9730716bd1e2b568a6170c22711a3e96b
+u
+Eapp/src/main/java/com/brayandev/listtaskapp/presentation/task/Task.kt,3\2\32079e64c3c6bf5027ce542fbb2d8e1887285410
+y
+Iapp/src/main/java/com/brayandev/listtaskapp/presentation/splash/Splash.kt,c\b\cb76f175e11f5c2f5a6b3b55e78a8d02364a2cc6
+}
+Mapp/src/main/java/com/brayandev/listtaskapp/presentation/navigation/Routes.kt,9\b\9b445a38d5f6d7775bbab1ffa109a15d121fb210
+
+Qapp/src/main/java/com/brayandev/listtaskapp/presentation/navigation/Navigation.kt,e\d\ede31c16510bc3f80e008ea13534bdcd87e3e203

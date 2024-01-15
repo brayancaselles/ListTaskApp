@@ -1,4 +1,4 @@
-package com.brayandev.listtaskapp.presentation
+package com.brayandev.listtaskapp.presentation.task
 
 import com.brayandev.listtaskapp.domain.model.TaskModel
 

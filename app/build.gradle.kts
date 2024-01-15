@@ -92,6 +92,10 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
 
+    // Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.4")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+
     // Arrow kotlin
     implementation("io.arrow-kt:arrow-core:1.1.5")
     implementation("io.arrow-kt:arrow-optics:1.1.5")
