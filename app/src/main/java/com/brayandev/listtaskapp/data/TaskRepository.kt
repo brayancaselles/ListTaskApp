@@ -2,14 +2,12 @@ package com.brayandev.listtaskapp.data
 
 import com.brayandev.listtaskapp.data.dataBase.dao.TaskDao
 import com.brayandev.listtaskapp.data.dataBase.entity.toEntity
-import com.brayandev.listtaskapp.data.dataSource.TaskDataSource
 import com.brayandev.listtaskapp.domain.model.TaskModel
 import com.brayandev.listtaskapp.domain.model.toModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
-class TaskRepository @Inject constructor(private val dao: TaskDao/*private val dataSource: TaskDataSource*/) {
+class TaskRepository (private val dao: TaskDao) {
 
     val tasks: Flow<List<TaskModel>> = dao.getAllTask().map { items -> items.map { it.toModel() } }
 

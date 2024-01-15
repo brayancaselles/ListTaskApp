@@ -60,9 +60,10 @@ import com.brayandev.listtaskapp.domain.model.TaskModel
 import com.brayandev.listtaskapp.presentation.task.UiState.Error
 import com.brayandev.listtaskapp.presentation.task.UiState.Loading
 import com.brayandev.listtaskapp.presentation.task.UiState.Success
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun Task(viewModel: TaskViewModel) {
+fun Task(viewModel: TaskViewModel = koinViewModel()) {
     val showDialog: Boolean by viewModel.showDialog.observeAsState(false)
 
     val lifecycle = LocalLifecycleOwner.current.lifecycle

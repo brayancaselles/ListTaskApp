@@ -1,43 +1,44 @@
 package com.brayandev.listtaskapp.di
 
-/*
+import androidx.room.Room
+import com.brayandev.listtaskapp.data.TaskRepository
+import com.brayandev.listtaskapp.data.dataBase.TaskDataBase
+import com.brayandev.listtaskapp.domain.AddTaskUseCase
+import com.brayandev.listtaskapp.domain.DeleteTaskUseCase
+import com.brayandev.listtaskapp.domain.GetAllTaskUseCase
+import com.brayandev.listtaskapp.domain.UpdateTaskUseCase
+import com.brayandev.listtaskapp.presentation.task.TaskViewModel
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.module.dsl.factoryOf
+import org.koin.dsl.module
+
 val dataBaseModule = module {
 
     single {
-        Room.databaseBuilder(androidContext(), TaskDataBase::class.java, "task_table")
+        Room.databaseBuilder(androidContext(), TaskDataBase::class.java, "AllDataBase")
             .build()
     }
     single { get<TaskDataBase>().taskDao() }
+    single { TaskRepository(get()) }
 }
 
-val dataSourceModule = module {
-    singleOf(::TaskDataSource) */
-/*{ TaskDataSource(get()) }*//*
-
-}
 
 val repositoryModule = module {
-    factoryOf(::TaskRepository)
+    single { TaskRepository(get()) }
 }
 
-val dataModule = listOf(dataBaseModule, dataSourceModule, repositoryModule)
 
 val useCaseModule = module {
-    */
-/*factory { GetAllTaskUseCase(repository = get()) }
-    factory { AddTaskUseCase(repository = get()) }
-    factory { DeleteTaskUseCase(repository = get()) }
-    factory { UpdateTaskUseCase(repository = get()) }*//*
-
     factoryOf(::GetAllTaskUseCase)
     factoryOf(::AddTaskUseCase)
     factoryOf(::DeleteTaskUseCase)
     factoryOf(::UpdateTaskUseCase)
 }
 
-val domainModule = listOf(useCaseModule)
 
 val dataAppModule = module {
+
     viewModel {
         TaskViewModel(
             getAllTaskUseCase = get(),
@@ -47,8 +48,3 @@ val dataAppModule = module {
         )
     }
 }
-
-
-object Constants {
-    const val TASK_DATABASE = "task_table"
-}*/

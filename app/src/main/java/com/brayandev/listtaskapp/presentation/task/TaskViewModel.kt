@@ -9,20 +9,17 @@ import com.brayandev.listtaskapp.domain.DeleteTaskUseCase
 import com.brayandev.listtaskapp.domain.GetAllTaskUseCase
 import com.brayandev.listtaskapp.domain.UpdateTaskUseCase
 import com.brayandev.listtaskapp.domain.model.TaskModel
-import com.brayandev.listtaskapp.presentation.task.UiState.Success
 import com.brayandev.listtaskapp.presentation.task.UiState.Error
 import com.brayandev.listtaskapp.presentation.task.UiState.Loading
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.brayandev.listtaskapp.presentation.task.UiState.Success
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class TaskViewModel @Inject constructor(
+class TaskViewModel (
     getAllTaskUseCase: GetAllTaskUseCase,
     private val addTaskUseCase: AddTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,

@@ -2,7 +2,6 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.kapt")
-    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -72,13 +71,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
-    /*// koin dependency injection
+    // koin dependency injection
     implementation("io.insert-koin:koin-android:3.4.0")
-    implementation("io.insert-koin:koin-androidx-compose:3.4.1")*/
-
-    // Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    implementation("io.insert-koin:koin-androidx-compose:3.4.1")
 
     // Live Data
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -94,7 +89,7 @@ dependencies {
 
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.7.4")
-    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
+    //implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
 
     // Arrow kotlin
     implementation("io.arrow-kt:arrow-core:1.1.5")
