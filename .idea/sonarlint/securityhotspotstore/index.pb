@@ -3,8 +3,6 @@ D
 app/build.gradle.kts,d\2\d2a4383452aad84a18429a5844d31330a012a9e6
 j
 :app/src/main/java/com/brayandev/listtaskapp/ListTaskApp.kt,d\3\d374209bf1c539abf584f98be52fa1af29b9175c
-d
-4app/src/main/java/com/brayandev/listtaskapp/di/di.kt,b\e\be9ff5d860fe9928a735cabf3aeeda859ce189be
 |
 Lapp/src/main/java/com/brayandev/listtaskapp/presentation/ListTaskActivity.kt,2\0\20241bbd214d8d38915261a3b084eec0ef87e23f
 p
@@ -31,12 +29,8 @@ Gapp/src/main/java/com/brayandev/listtaskapp/domain/GetAllTaskUseCase.kt,5\b\5b
 Q.idea/sonarlint/securityhotspotstore/2/0/20241bbd214d8d38915261a3b084eec0ef87e23f,b\1\b1ea58ae6a46b92bd123108adb3f4a0f8137c495
 ]
 -.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
-w
-G.idea/sonarlint/issuestore/b/e/be9ff5d860fe9928a735cabf3aeeda859ce189be,2\2\22ea5199271e75362387dc042191aab65dc82b17
 S
 #.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
-Å
-Q.idea/sonarlint/securityhotspotstore/b/e/be9ff5d860fe9928a735cabf3aeeda859ce189be,c\e\ce6cd6771864373f25068c4089e8efa5ed3407e8
 Å
 Q.idea/sonarlint/securityhotspotstore/d/7/d724ab0dff4a48f65416574a4bb809cb9ea28cb2,c\5\c5aeb2ed833f33253095effec6fc53e11fbde118
 Å
@@ -106,8 +100,10 @@ Gapp/src/main/java/com/brayandev/listtaskapp/domain/UpdateTaskUseCase.kt,8\7\87
 s
 Capp/src/main/java/com/brayandev/listtaskapp/presentation/UiState.kt,c\e\ce43bd602a154047f3141aa38661761f7c5fc860
 l
-<app/src/main/java/com/brayandev/listtaskapp/di/DatabaseDI.kt,b\b\bb0324b5358abb46c87ec3323b00d7bc72772fd7
-p
-@app/src/main/java/com/brayandev/listtaskapp/di/DatabaseModule.kt,2\e\2e006c9e714d438a327e05751207c6ee9b1df6df
-l
 <app/src/main/java/com/brayandev/listtaskapp/di/DataModule.kt,e\f\effaf3d0d6d0b61e70596088b3d51bcf2f2c94a4
+@
+build.gradle.kts,d\b\dbcff70658daf80b53ce624f6adcaa529df5ed8d
+l
+<app/src/main/java/com/brayandev/listtaskapp/di/RoomModule.kt,0\c\0c68897fd2f0f2e0aec4171c9122d2cbc796a58b
+w
+G.idea/sonarlint/issuestore/2/0/20241bbd214d8d38915261a3b084eec0ef87e23f,a\f\afd5874d8d63bffc83724c964d36c06c21951f8a

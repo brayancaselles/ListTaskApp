@@ -1,22 +1,17 @@
 package com.brayandev.listtaskapp
 
 import android.app.Application
-import com.brayandev.listtaskapp.di.dataAppModule
-import com.brayandev.listtaskapp.di.dataBaseModule
-import com.brayandev.listtaskapp.di.dataModule
-import com.brayandev.listtaskapp.di.domainModule
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class ListTaskApp : Application() {
 
-    override fun onCreate() {
+    /*override fun onCreate() {
         super.onCreate()
         startKoin {
             androidLogger()
             androidContext(this@ListTaskApp)
-            modules(dataAppModule, domainModule, dataModule, dataBaseModule)
+            modules(dataModule + domainModule + listOf(dataAppModule))
         }
-    }
+    }*/
 }

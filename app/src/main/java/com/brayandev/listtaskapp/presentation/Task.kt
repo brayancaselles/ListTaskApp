@@ -1,9 +1,12 @@
 package com.brayandev.listtaskapp.presentation
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,19 +20,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.Edit
+import androidx.compose.material.icons.rounded.LineStyle
 import androidx.compose.material.icons.rounded.Store
+import androidx.compose.material.icons.rounded.Task
+import androidx.compose.material.icons.rounded.TaskAlt
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Snackbar
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,6 +53,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,16 +63,18 @@ import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import com.brayandev.listtaskapp.domain.model.TaskModel
-import org.koin.androidx.compose.koinViewModel
+import com.brayandev.listtaskapp.presentation.UiState.Error
+import com.brayandev.listtaskapp.presentation.UiState.Loading
+import com.brayandev.listtaskapp.presentation.UiState.Success
 
 @Composable
-fun Task(viewModel: TaskViewModel = koinViewModel()) {
+fun Task(viewModel: TaskViewModel) {
     val showDialog: Boolean by viewModel.showDialog.observeAsState(false)
 
     val lifecycle = LocalLifecycleOwner.current.lifecycle
 
     val uiState by produceState<UiState>(
-        initialValue = UiState.Loading,
+        initialValue = Loading,
         key1 = lifecycle,
         key2 = viewModel
     ) {
@@ -70,18 +83,40 @@ fun Task(viewModel: TaskViewModel = koinViewModel()) {
         }
     }
 
-    Column(modifier = Modifier.fillMaxWidth()) {
-        Title("Lista de Tareas", Icons.Filled.List)
-        Box(modifier = Modifier.fillMaxSize()) {
-            AddTaskDialog(
-                show = showDialog,
-                onDismiss = { viewModel.onDialogClose() },
-                onStoreAdded = { viewModel.onTaskCreated(it) },
+    when (uiState) {
+        is Error -> {
+            Log.d(
+                "Error",
+                "ah ocurrido el siguiente error -> ${(uiState as Error).throwable}"
             )
-            FabDialog(modifier = Modifier.align(Alignment.BottomEnd), viewModel)
-            TaskList((uiState as UiState.Success).tasks, viewModel)
+        }
+
+        Loading -> {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                CircularProgressIndicator()
+            }
+        }
+
+        is Success -> {
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Title("Lista de Tareas", Icons.Rounded.TaskAlt)
+                Box(modifier = Modifier.fillMaxSize()) {
+                    AddTaskDialog(
+                        show = showDialog,
+                        onDismiss = { viewModel.onDialogClose() },
+                        onStoreAdded = { viewModel.onTaskCreated(it) },
+                    )
+                    FabDialog(modifier = Modifier.align(Alignment.BottomEnd), viewModel)
+                    TaskList((uiState as Success).tasks, viewModel)
+                }
+            }
         }
     }
+
+
 }
 
 @Composable
@@ -176,14 +211,32 @@ fun FabDialog(modifier: Modifier, viewModel: TaskViewModel) {
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TaskList(
     taskList: List<TaskModel>,
     viewModel: TaskViewModel,
 ) {
+
+    val taskListGrouped = taskList.groupBy { it.isSelected }
+
     LazyColumn {
-        items(taskList, key = { it.id }) { item ->
-            ItemTask(item, viewModel)
+
+        taskListGrouped.forEach { (isSelected, tasks) ->
+            stickyHeader {
+                Text(
+                    text = if (isSelected) "Completadas" else "Pendientes",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color.White),
+                    fontSize = 16.sp,
+                    color = Color.Black,
+                )
+            }
+
+            items(tasks,key = { it.id }) { item ->
+                ItemTask(item, viewModel)
+            }
         }
     }
 }
@@ -210,7 +263,7 @@ fun ItemTask(task: TaskModel, taskViewModel: TaskViewModel) {
         ) {
             Icon(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                imageVector = Icons.Rounded.Store,
+                imageVector = Icons.Rounded.Task,
                 contentDescription = "Icon_task",
                 tint = Color.Black,
             )
@@ -223,6 +276,17 @@ fun ItemTask(task: TaskModel, taskViewModel: TaskViewModel) {
             Checkbox(
                 checked = task.isSelected,
                 onCheckedChange = { taskViewModel.onCheckBoxSelected(task) },
+            )
+
+            Icon(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+                    .clickable {
+                        taskViewModel.onTaskRemove(task)
+                    },
+                imageVector = Icons.Rounded.Delete,
+                contentDescription = "Icon_delete_task",
+                tint = Color.Red,
             )
         }
     }

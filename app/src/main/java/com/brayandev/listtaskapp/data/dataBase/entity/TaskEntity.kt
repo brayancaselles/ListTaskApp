@@ -3,10 +3,9 @@ package com.brayandev.listtaskapp.data.dataBase.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.brayandev.listtaskapp.di.Constants
 import com.brayandev.listtaskapp.domain.model.TaskModel
 
-@Entity(tableName = Constants.TASK_DATABASE)
+@Entity(tableName = "task_table")
 data class TaskEntity(
     @PrimaryKey
     @ColumnInfo(name = "id")

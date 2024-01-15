@@ -6,8 +6,9 @@ import com.brayandev.listtaskapp.domain.model.TaskModel
 import com.brayandev.listtaskapp.domain.model.toModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class TaskDataSource(private val dao: TaskDao) {
+class TaskDataSource @Inject constructor(private val dao: TaskDao) {
 
     val tasks: Flow<List<TaskModel>> = dao.getAllTask().map { items -> items.map { it.toModel() } }
 

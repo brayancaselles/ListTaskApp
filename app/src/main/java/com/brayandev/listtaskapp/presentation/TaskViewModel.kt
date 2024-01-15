@@ -12,14 +12,17 @@ import com.brayandev.listtaskapp.domain.model.TaskModel
 import com.brayandev.listtaskapp.presentation.UiState.Success
 import com.brayandev.listtaskapp.presentation.UiState.Error
 import com.brayandev.listtaskapp.presentation.UiState.Loading
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class TaskViewModel(
+@HiltViewModel
+class TaskViewModel @Inject constructor(
     getAllTaskUseCase: GetAllTaskUseCase,
     private val addTaskUseCase: AddTaskUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
